@@ -22,8 +22,8 @@ type Workflow struct {
 	//       "queue":"WQ0c1274082082355320d8a41f94eb57aa"
 	//  }}}`
 	Configuration                 string     `json:"configuration"`
-	AssignmentCallbackURL         string     `json:"assignment_callback_url"`
-	FallbackAssignmentCallbackURL string     `json:"fallback_assignment_callback_url"`
+	AssignmentCallbackUrl         string     `json:"assignment_callback_url"`
+	FallbackAssignmentCallbackUrl string     `json:"fallback_assignment_callback_url"`
 	TaskReservationTimeout        int        `json:"task_reservation_timeout"`
 	DateCreated                   TwilioTime `json:"date_created"`
 	DateUpdated                   TwilioTime `json:"date_updated"`
