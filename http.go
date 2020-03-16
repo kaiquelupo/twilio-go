@@ -465,6 +465,7 @@ func (c *Client) GetResource(ctx context.Context, pathPart string, sid string, v
 
 // CreateResource makes a POST request to the given resource.
 func (c *Client) CreateResource(ctx context.Context, pathPart string, data url.Values, v interface{}) error {
+	fmt.Println(data)
 	return c.MakeRequest(ctx, "POST", pathPart, data, v)
 }
 
