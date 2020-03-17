@@ -7,7 +7,6 @@ import (
 
 type ServerlessServiceCreator struct {
 	client       *Client
-	workspaceSid string
 }
 
 type Service struct {
@@ -25,13 +24,13 @@ type Service struct {
 func (r *ServerlessServiceCreator) Get(ctx context.Context, sid string) (*Service, error) {
 	service := new(Service)
 	err := r.client.GetResource(ctx, "Services", sid, service)
-	return worker, err
+	return service, err
 }
 
 func (r *ServerlessServiceCreator) Create(ctx context.Context, data url.Values) (*Service, error) {
 	service := new(Service)
 	err := r.client.CreateResource(ctx, "Services", data, service)
-	return worker, err
+	return service, err
 }
 
 
@@ -42,5 +41,5 @@ func (r *ServerlessServiceCreator) Delete(ctx context.Context, sid string) error
 func (r *ServerlessServiceCreator) Update(ctx context.Context, sid string, data url.Values) (*Service, error) {
 	service := new(Service)
 	err := r.client.UpdateResource(ctx, "Services", sid, data, service)
-	return worker, err
+	return service, err
 }
