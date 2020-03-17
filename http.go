@@ -69,6 +69,8 @@ const TaskRouterVersion = "v1"
 
 var WorkspaceBaseUrl = "https://taskrouter.twilio.com"
 
+var ServerlessBaseUrl = "https://serverless.twilio.com"
+
 const WorkspaceVersion = "v1"
 
 type Client struct {
@@ -289,6 +291,17 @@ func NewWorkspaceClient(accountSid string, authToken string, httpClient *http.Cl
 	return c
 }
 
+// Client for Serverless CRUD
+func NewServerlessClient(accountSid string, authToken string, httpClient *http.Client) *Client {
+	if httpClient == nil {
+		httpClient = &http.Client{Timeout: defaultTimeout}
+	}
+	c := newNewClient(accountSid, authToken, ServerlessBaseUrl, httpClient)
+	c.APIVersion = WorkspaceVersion
+	return c
+}
+
+
 // NewPricingClient returns a new Client to use the pricing API
 func NewPricingClient(accountSid string, authToken string, httpClient *http.Client) *Client {
 	c := newNewClient(accountSid, authToken, PricingBaseURL, httpClient)
@@ -366,8 +379,8 @@ func NewClient(accountSid string, authToken string, httpClient *http.Client) *Cl
 	c.Video = NewVideoClient(accountSid, authToken, httpClient)
 	c.TaskRouter = NewTaskRouterClient(accountSid, authToken, httpClient)
 	c.WorkspaceClient = NewWorkspaceClient(accountSid, authToken, httpClient)
-	
-	c.Serverless = &ServerlessServiceCreator{client: c}
+	c.Serverless = NewServerlessClient(accountSid, authToken, httpClient)
+
 	c.Accounts = &AccountService{client: c}
 	c.Applications = &ApplicationService{client: c}
 	c.Calls = &CallService{client: c}
