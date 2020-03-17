@@ -23,23 +23,23 @@ type Service struct {
 
 func (r *ServerlessServiceCreator) Get(ctx context.Context, sid string) (*Service, error) {
 	service := new(Service)
-	err := r.client.GetResource(ctx, "Services", sid, service)
+	err := r.client.Serverless.Service.GetResource(ctx, "Services", sid, service)
 	return service, err
 }
 
 func (r *ServerlessServiceCreator) Create(ctx context.Context, data url.Values) (*Service, error) {
 	service := new(Service)
-	err := r.client.CreateResource(ctx, "Services", data, service)
+	err := r.client.Serverless.Service.CreateResource(ctx, "Services", data, service)
 	return service, err
 }
 
 
 func (r *ServerlessServiceCreator) Delete(ctx context.Context, sid string) error {
-	return r.client.DeleteResource(ctx, "Services", sid)
+	return r.client.Serverless.Service.DeleteResource(ctx, "Services", sid)
 }
 
 func (r *ServerlessServiceCreator) Update(ctx context.Context, sid string, data url.Values) (*Service, error) {
 	service := new(Service)
-	err := r.client.UpdateResource(ctx, "Services", sid, data, service)
+	err := r.client.Serverless.Service.UpdateResource(ctx, "Services", sid, data, service)
 	return service, err
 }
