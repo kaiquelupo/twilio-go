@@ -85,6 +85,8 @@ type Client struct {
 	Video           *Client
 	TaskRouter      *Client
 	WorkspaceClient *Client
+	Serverless *Client
+
 
 	// FullPath takes a path part (e.g. "Messages") and
 	// returns the full API path, including the version (e.g.
@@ -141,8 +143,6 @@ type Client struct {
 
 	// NewTaskRouterClient initializes these services
 	Workspace func(sid string) *WorkspaceService
-
-	Serverless *ServerlessServiceCreator
 
 	// NewWorkspaceClient initializes these services
 	WorkspaceCreator *WorkspaceCreator
