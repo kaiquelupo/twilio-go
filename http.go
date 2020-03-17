@@ -140,6 +140,8 @@ type Client struct {
 	// NewTaskRouterClient initializes these services
 	Workspace func(sid string) *WorkspaceService
 
+	Serverless *ServerlessService
+
 	// NewWorkspaceClient initializes these services
 	WorkspaceCreator *WorkspaceCreator
 }
@@ -364,7 +366,8 @@ func NewClient(accountSid string, authToken string, httpClient *http.Client) *Cl
 	c.Video = NewVideoClient(accountSid, authToken, httpClient)
 	c.TaskRouter = NewTaskRouterClient(accountSid, authToken, httpClient)
 	c.WorkspaceClient = NewWorkspaceClient(accountSid, authToken, httpClient)
-
+	
+	c.Serverless = &ServerlessService{client: c}
 	c.Accounts = &AccountService{client: c}
 	c.Applications = &ApplicationService{client: c}
 	c.Calls = &CallService{client: c}
