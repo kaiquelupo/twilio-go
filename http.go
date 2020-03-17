@@ -85,6 +85,7 @@ type Client struct {
 	Video           *Client
 	TaskRouter      *Client
 	WorkspaceClient *Client
+	Serverless *Client
 
 	// FullPath takes a path part (e.g. "Messages") and
 	// returns the full API path, including the version (e.g.
@@ -145,7 +146,7 @@ type Client struct {
 	// NewWorkspaceClient initializes these services
 	WorkspaceCreator *WorkspaceCreator
 
-	Serverless *ServerlessService
+	Service *ServerlessServiceCreator
 }
 
 const defaultTimeout = 30*time.Second + 500*time.Millisecond
@@ -298,9 +299,8 @@ func NewServerlessClient(accountSid string, authToken string, httpClient *http.C
 	}
 	c := newNewClient(accountSid, authToken, ServerlessBaseUrl, httpClient)
 	c.APIVersion = WorkspaceVersion
-	c.Serverless = &ServerlessService {
-		Service: &ServerlessServiceCreator{ client:c },
-	}
+	
+	c.Service = &ServerlessServiceCreator{ client:c }
 
 	return c
 }
