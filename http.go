@@ -298,14 +298,10 @@ func NewServerlessClient(accountSid string, authToken string, httpClient *http.C
 	}
 	c := newNewClient(accountSid, authToken, ServerlessBaseUrl, httpClient)
 	c.APIVersion = WorkspaceVersion
-
-	c.Serverless = *ServerlessService {
-		return &ServerlessService{
-			Service: &ServerlessServiceCreator{
-				client:       c,
-			},
-		}
+	c.Serverless = &ServerlessService {
+		Service: &ServerlessServiceCreator{ client:c },
 	}
+
 	return c
 }
 
